@@ -28,5 +28,7 @@
     <module>base-compone</module>
     <module>base-module</module>
     <module>base-service-api</module>
+    <module>base-service-integration</module>
+    <module>base-service-valid</module>
   </modules>
 </project>
