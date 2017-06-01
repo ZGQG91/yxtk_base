@@ -1,0 +1,118 @@
+#set($layout = "/layouts/layout.vm")
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <title>Metronic | Login Page</title>
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <meta content="" name="description" />
+
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="media/image/favicon.ico" />
+    <style type="text/css">
+        *{
+            margin:0;
+            padding: 0;
+        }
+        body,html{
+            height: 100%;
+            background: url(image/web/login-bg.png) no-repeat left center / 100%;
+        }
+        .my-container{
+            width: 276px;
+            color: #fff;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .my-title{
+            font-size: 18px;
+            /*background: url(image/web/outline-icon.png) no-repeat 40px center;*/
+            background-size: 20px;
+            margin-bottom: 22px;
+        }
+        .form-group{
+            position: relative;
+        }
+        input{
+            height: 40px !important;
+            border: none;
+        }
+        span#username-img,span#password-img{
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 40px;
+            width: 40px;
+            border-radius: 5px;
+        }
+        span#username-img{
+            background: url(image/web/user.png) no-repeat center #1b3856;
+        }
+        span#password-img{
+            background: url(image/web/password.png) no-repeat center #1b3856;
+        }
+        .form-control{
+            background-color: #35608a;
+            text-indent: 45px;
+            color: #fff;
+        }
+        .form-control::-webkit-input-placeholder {
+            color: #fff;
+        }
+        .keep-password{
+            cursor: pointer;
+            padding: 0 0 0 20px;
+            font-size: 12px;
+            line-height: 14px;
+            background: url(image/web/keep-password1.png) no-repeat left center;
+        }
+        .keep-password-active{
+            background: url(image/web/keep-password2.png) no-repeat left center;
+        }
+        .login-btn{
+            font-weight: bold;
+        }
+        .icon-th-large:before {
+            position: absolute;
+            left: 55px;
+            top: 5px;
+        }
+    </style>
+</head>
+
+<body class="login">
+    <div class="my-container text-center">
+##        <form role="form" action="index.do" method="post" class="text-center">
+            <p class="my-title"><span class="icon-th-large"></span>数据采集系统</p>
+            <div class="form-group">
+                <span id="username-img"></span>
+                <input type="text" class="form-control" id="username" name="username" placeholder="用户名">
+            </div>
+            <div class="form-group">
+                <span id="password-img"></span>
+                <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+            </div>
+            <p class="text-right">
+                <span class="keep-password">记住密码</span>
+            </p>
+            <input type="button" class="btn btn-primary login-btn" style="width: 130px" value="登录"/>
+            <input type="button" class="btn btn-primary register-btn" style="width: 130px" value="注册"/>
+##        </form>
+    </div>
+    <script src="js/web/login.js" type="text/javascript"></script>
+</body>
+</html>

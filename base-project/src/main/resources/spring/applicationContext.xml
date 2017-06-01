@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="controllerMethodInterceptor" class="com.yidu.cache.CacheInterceptor"/>
+    <!-- 方法拦截器（拦截组件实现包中的所有被Cached注解的方法） MethodInterceptor -->
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="controllerMethodPointcut" expression="execution(* com.yidu.compone.impl..*(..)) and
+        @annotation(com.yidu.cache.Cached)"/>
+        <aop:advisor advice-ref="controllerMethodInterceptor" pointcut-ref="controllerMethodPointcut" />
+    </aop:config>
+    <!--自动扫包-->
+    <mvc:annotation-driven />
+    <context:component-scan base-package="com.yidu.controller"
+                            use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+    <context:component-scan base-package="com.yidu.service.impl"
+                            use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
+    <context:component-scan base-package="com.yidu.handler"
+                            use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
+    <context:component-scan base-package="com.yidu.compone.impl"
+                            use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
+    </context:component-scan>
+    <context:component-scan base-package="com.yidu.compone.item"
+                            use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
+    </context:component-scan>
+    <context:component-scan base-package="com.yidu.dao"
+                            use-default-filters="false">
+        <context:include-filter type="annotation" expression="com.yidu.MybatisDao" />
+    </context:component-scan>
+    <context:component-scan base-package="com.yidu.template"
+                            use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
+    <!--引入数据源-->
+    <import resource="classpath*:*-config.xml" />
+    <!--引入服务-->
+    <import resource="classpath*:handlerService.xml" />
+    <context:property-placeholder  location="classpath*:properties/*-conf.properties" />
+</beans>

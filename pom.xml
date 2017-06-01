@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.yidu.api</groupId>
+  <artifactId>yxtk_base</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0</version>
+  <distributionManagement>
+    <repository>
+      <id>readyidu-tvfing</id>
+      <name>Readyidu tingfv</name>
+      <url>http://192.168.4.180:8081/nexus/content/repositories/tingfv/</url>
+    </repository>
+  </distributionManagement>
+
+  <properties>
+    <spring.version>4.1.7.RELEASE</spring.version>
+    <mybatis.version>3.1.1</mybatis.version>
+    <mybatis.spring.version>1.1.1</mybatis.spring.version>
+    <mysql.version>5.1.23</mysql.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <modules>
+    <module>base-dao</module>
+    <module>base-project</module>
+    <module>base-service-impl</module>
+    <module>base-service</module>
+    <module>base-compone</module>
+    <module>base-module</module>
+    <module>base-service-api</module>
+  </modules>
+</project>

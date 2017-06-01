@@ -1,0 +1,222 @@
+
+<html>
+<head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Metronic | Admin Dashboard Template</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+        <meta content="" name="description" />
+
+        <meta content="" name="author" />
+        <link rel="stylesheet" href="css/web/main.css">
+        <link rel="stylesheet" href="css/web/pub.css">
+    </head>
+</head>
+
+<body>
+<div class="container-fluid box">
+    <div class="header">
+        <div class="pull-left header-left">
+            <h3><span class="icon-th-large"></span>&nbsp;SCADA系统</h3>
+        </div>
+        <div class="pull-right header-right">
+            <span class="icon-large icon-user"></span>
+            <span class="username"></span>
+            <span class="icon-large icon-off quit" @click="quit"></span>
+        </div>
+    </div>
+    <div class="main">
+        <div class="pull-left main-left">
+            <ul>
+                <li v-for="(value, index) in routerList" v-text="value" @click="go(value, index)"></li>
+            </ul>
+        </div>
+        <div class="main-right">
+            <div class="main-right-box">
+                <div class="main-right-box-top">
+                    <h3 v-text="mainRightTitle"></h3>
+                    <div class="path-row" style="box-shadow: 0 1px 10px;">
+                        <span>Home</span> > <span v-text="mainRightTitle"></span>
+                        <div class="mysearch pull-right">
+##                            <input type="text">
+                        </div>
+                    </div>
+                </div>
+                <div style="min-height: 500px;background-color: #fff; padding-top: 0.1px;">
+                    <router-view></router-view>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script id="scadaTab" type="text/x-template">
+    <div id="scada">
+        <main>
+            <div class="upplane">
+                <button class="save">Save</button>
+                <button class="add">Add</button>
+                <span class="selectapp">
+                    请选择app:
+                    <select>
+                        <option value="">请选择app</option>
+                    </select>
+                </span>
+                <span class="selectpoint">
+                    请选择point:
+                    <select>
+                        <option value="">新增point</option>
+                    </select>
+                </span>
+                采样率:
+                <span class="sampleRate"><input type="number"/></span>%
+            </div>
+            <div class="clearfix content">
+                <div class="noData">
+                    <p>There's no data here,Please click on the Add button.</p>
+                </div>
+            </div>
+        </main>
+        <div class="msgPlane">
+            <div class="innerPlane">
+                <h3>编辑信息</h3>
+                <div class="msgPlane-content">
+                    <p>
+                        <label for="dimension">维度</label>
+                        <input type="text" name="" id="dimension" value="" placeholder="请输入维度" />
+                    </p>
+                    <p>
+                        <label for="min">最小值</label>
+                        <input type="number" name="" id="min" value="" placeholder="请输入维度的最小值" />
+                    </p>
+                    <p>
+                        <label for="max">最大值</label>
+                        <input type="number" name="" id="max" value="" placeholder="请输入维度的最大值" />
+                    </p>
+                    <p>
+                        <label for="count">count</label>
+                        <input type="number" name="" id="count" value="" placeholder="请输入维度的count" />
+                    </p>
+                    <hr />
+                    <table>
+                        <tr>
+                            <th>指标</th>
+                            <th>最小值</th>
+                            <th>最大值</th>
+                            <th><button class="tableAdd">Add</button></th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="confirm">
+                    <button class="confirmBtn">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="pubTab" type="text/x-template">
+    <div id="pub">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>
+                ##                    <input type="checkbox" @click="allChoose" :checked="allChooseFalse">
+                </th>
+                <th>plugName</th>
+                <th>debug</th>
+                <th>uploadDuration</th>
+                <th>cacheSize</th>
+                <th>switch</th>
+                <th>appId</th>
+                <th>
+                    <span class="add" @click="addModal"><img src="image/web/add.png" alt=""></span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(value, index) in pubData" :publicId="value.publicId">
+                <td>
+                    {{index + 1}} <input type="radio" name="delRadio" :checked="allChooseFalse">
+                </td>
+                <td>
+                    {{value.plugName}}
+                </td>
+                <td>
+                    {{value.base.debug}}
+                </td>
+                <td :configId="value.configId">
+                    {{value.base.uploadDuration}}
+                </td>
+                <td>
+                    {{value.base.cacheSize}}
+                </td>
+                <td>
+                    {{value.base.switch}}
+                </td>
+                <td>
+                    {{value.id}}
+                </td>
+                <td>
+                    <button class="btn btn-primary" @click="changeModal(value)">编辑</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <nav class="pull-right my-nav">
+            <ul class="pagination">
+            </ul>
+        </nav>
+        <button class="btn btn-primary delete" @click="del()">删除</button>
+
+        <!-- Small modal -->
+        <div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <p>添加公众号</p>
+                ##                    <form action="api/public/configPublic.do" method="get">
+                    <table>
+                        <tr>
+                            <td>plugName</td>
+                            <td><input type="text" id="plugName" name="plugName"></td>
+                        </tr>
+                        <tr>
+                            <td>debug</td>
+                            <td>
+                                <input type="number" id="debug" name="debug">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>uploadDuration</td>
+                            <td>
+                                <input type="number" id="uploadDuration" name="uploadDuration">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>dataCache</td>
+                            <td><input id="dataCache" type="number" name="dataCache"></td>
+                        </tr>
+                        <tr>
+                            <td>switch</td>
+                            <td><input id="myswitch" type="number" name="myswitch"></td>
+                        </tr>
+                        <tr>
+                            <input id="id" type="hidden" name="userId">
+                            <td colspan="2"><button class="btn btn-default btn-large" @click="save">保存</button></td>
+                        </tr>
+                    </table>
+                ##                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script src="js/web/vue.min.js"></script>
+<script src="js/web/vue-router.min.js"></script>
+<script src="js/web/vue-resource.min.js"></script>
+<script src="js/web/main.js"></script>
+</html>

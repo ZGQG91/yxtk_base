@@ -1,0 +1,89 @@
+#pub{
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    overflow: hidden;
+}
+
+#pub table{
+    border-bottom: 1px solid grey;
+}
+
+#pub table thead{
+    background-color: #4d4c50;
+    color: #fff;
+}
+
+#pub table thead .add{
+    cursor: pointer;
+    font-size:16px;
+}
+
+#pub table th{
+    text-align: center;
+}
+
+#pub table td{
+    text-align: center;
+    vertical-align: middle;
+}
+
+#pub nav{
+    margin-right:34px;
+}
+
+#pub .delete{
+    margin:20px 0 0 34px;
+}
+
+#myModal .modal-content{
+    width: 508px;
+    background-color: #e1e1e1;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    overflow: hidden;
+}
+
+#myModal .modal-content p{
+    height: 56px;
+    line-height: 56px;
+    color: #fff;
+    font-size:18px;
+    background-color: #1f1e1f;
+    text-align: center;
+}
+
+#myModal .modal-content table{
+    width: 100%;
+}
+
+#myModal .modal-content table tr{
+    height: 56px;
+}
+
+#myModal .modal-content table td:first-child{
+    width: 30%;
+    text-align: right;
+}
+
+#myModal .modal-content table td:last-child{
+    text-align: left;
+    text-indent:20px;
+}
+
+#myModal .modal-content table input,#myModal .modal-content table select{
+    width: 200px;
+    height: 34px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+}
+
+#myModal .modal-content table button{
+    width: 150px;
+}
+
+#myModal .modal-content table tr:last-child td{
+    text-align: center;
+}

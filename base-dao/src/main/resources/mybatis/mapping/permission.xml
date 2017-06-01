@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yidu.dao.PermissionMapper">
+    <select id="queryUserPermission" parameterType="string" resultType="com.yidu.Permission.PermissionModule">
+        select
+        service_name as serviceName,
+        method,
+        filter_type as filterType
+        from yxtk_permission
+        where user_id=#{userId}
+    </select>
+</mapper>

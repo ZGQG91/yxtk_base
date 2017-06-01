@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yidu.dao.RedBagActiveMapper">
+    <sql id="Base_Column_List" >
+        id as activeId,
+        redbag_min as redBagMin,
+        redbag_max as redBagMax,
+        create_time as createTime,
+        modify_time as modifyTime,
+        end_time as endTime,
+        begin_time as beginTime,
+        active_flag as activeFlag,
+        modifier as modifier,
+        active_img as activeImg,
+        advertisement as advertisementVideo,
+        advertise_time as advertiseTime,
+        web_url as webUrl,
+        is_web as isWeb
+    </sql>
+    <select id="getReadyRedBagActiveList" parameterType="java.util.Map" resultType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_red_bags_active
+        where 1=1 and active_flag=#{activeFlag} and is_deleted=0
+    </select>
+    <select id="getReadyRedBagActiveListByFlag" parameterType="Integer" resultType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_red_bags_active
+        where 1=1 and active_flag=#{activeFlag} and is_deleted=0
+    </select>
+    <select id="getRedBagActiveList" parameterType="java.util.Map" resultType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_red_bags_active
+        where 1=1
+        <if test="activeFlag != null and activeFlag != ''">
+            and active_flag=#{activeFlag}
+        </if>
+        <if test="is_deleted != null and is_deleted != ''">
+            and is_deleted=#{isDeleted}
+        </if>
+        <if test="positionType != null and positionType != ''">
+            and position_type=#{positionType}
+        </if>
+        <if test="pageNo > 0">
+            limit #{pageIndex},#{pageSize}
+        </if>
+    </select>
+    <select id="getRedBagActiveCount" parameterType="java.util.Map" resultType="Integer">
+        select
+        count(id)
+        from t_red_bags_active
+        where 1=1
+        <if test="activeFlag != null and activeFlag != ''">
+            and active_flag=#{activeFlag}
+        </if>
+        <if test="is_deleted != null and is_deleted != ''">
+            and is_deleted=#{isDeleted}
+        </if>
+    </select>
+    <select id="getRedBagActiveByActiveId" parameterType="java.util.Map" resultType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from t_red_bags_active
+        where 1=1
+        <if test="activeId != null and activeId != ''">
+            and id=#{activeId}
+        </if>
+    </select>
+    <update id="updateActive" parameterType="java.util.Map">
+        update t_red_bags_active set active_flag=#{activeFlag} where id=#{activeId}
+    </update>
+</mapper>

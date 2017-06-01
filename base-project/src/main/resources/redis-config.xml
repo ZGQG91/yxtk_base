@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        "
+       default-autowire="byName">
+    <bean id="cacheClient" class="com.yidu.compone.impl.CacheCompone">
+        <property name="redisTemplate" ref="redisTemplate"/>
+        <property name="name" value="${redis.cacheName}"/>
+    </bean>
+    <!-- redis 相关配置 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="softMinEvictableIdleTimeMillis" value="${redis.timeout}"/>
+    </bean>
+    <bean id="connectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="password" value="${redis.password}"/>
+        <property name="usePool" value="true"/>
+        <property name="poolConfig" ref="poolConfig"/>
+    </bean>
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+    <bean name="redisOperationsSessionRepository"
+          class="org.springframework.session.data.redis.RedisOperationsSessionRepository">
+        <constructor-arg ref="connectionFactory"/>
+    </bean>
+
+    <!-- 这个是Session策略过滤器，即将容器原有的Session持久化机制，代替为Spring的 Redis持久化Session机制。 -->
+    <!-- 注意，这个名字与 web.xml里的targetBean的下value是要一致的。 -->
+    <bean name="yunSession" class="org.springframework.session.web.http.SessionRepositoryFilter">
+        <constructor-arg ref="redisOperationsSessionRepository"/>
+        <property name="httpSessionStrategy">
+            <bean class="org.springframework.session.web.http.CookieHttpSessionStrategy">
+                <property name="cookieName" value="yunSessionid"/>
+            </bean>
+        </property>
+    </bean>
+</beans>

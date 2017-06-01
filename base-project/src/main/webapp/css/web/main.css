@@ -1,0 +1,113 @@
+html,body{
+    height:100%;
+    background-color: #2d2d30;
+}
+h3{
+    margin:20px 0 10px 0;
+}
+.box{
+    height: 100%;
+    padding-left:0;
+    padding-right:0;
+}
+
+.header{
+    height: 66px;
+    line-height: 66px;
+    color: #fff;
+    background-color: #1d1d20;
+}
+.header-left h3{
+    padding-left: 30px;
+}
+.header-right span{
+    margin:0 10px;
+}
+
+.main{
+    height: calc(100% - 66px);
+}
+
+.main-left{
+    width: 200px;
+    color: #fff;
+    margin: 16px 0 0 0;
+    background-color: #3b3a3f;
+}
+
+.main-left ul li{
+    height: 40px;
+    line-height: 40px;
+    text-indent: 50px;
+    cursor: pointer;
+}
+.main-left ul li.active{
+    color: #0bcb9c;
+}
+.main-left ul li:first-child{
+    background: url("../../image/web/pub1.png") no-repeat 30px center;
+}
+.main-left ul li:first-child.active{
+    background: url("../../image/web/pub.png") no-repeat 30px center #242428;
+}
+
+.main-left ul li:nth-child(2){
+    background: url("../../image/web/list1.png") no-repeat 30px center;
+}
+.main-left ul li:nth-child(2).active{
+    background: url("../../image/web/list.png") no-repeat 30px center #242428;
+}
+
+.main-right{
+    height: 100%;
+    padding-left: 200px;
+    background-color: #2d2d30;
+}
+
+.main-right-box{
+    padding:0 16px;
+    min-height: 100%;
+    background-color: #f1f1f2;
+}
+
+.main-right-box-top{
+    padding:0.1px 0 0 0;
+    height: 120px;
+}
+
+.main-right-box-top h3{
+    font-size: 30px;
+}
+
+.path-row{
+    height: 34px;
+    line-height: 34px;
+    font-size: 16px;
+    text-indent: 20px;
+    background:url("../../image/web/HOME.png") no-repeat 5px center;
+}
+
+.path-row input{
+    width: 252px;
+    height: 34px;
+    border:none;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
+    border:1px solid #e1e1e1;
+}
+/*----------------token---------------*/
+#token{
+    width: 80%;
+    margin: 30px auto 0;
+}
+#token .panel-body p {
+    width: 80%;
+    min-height: 34px;
+    color: #fff;
+    font-size: 20px;
+    line-height: 34px;
+    padding-left: 20px;
+    border-radius: 3px;
+    margin: 0 10px;
+}

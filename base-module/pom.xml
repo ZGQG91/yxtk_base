@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.yidu.api</groupId>
+    <artifactId>yxtk_base</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>base-module</artifactId>
+  <distributionManagement>
+    <repository>
+      <id>readyidu-tvfing</id>
+      <name>Readyidu tingfv</name>
+      <url>http://192.168.4.180:8081/nexus/content/repositories/tingfv/</url>
+    </repository>
+  </distributionManagement>
+</project>
