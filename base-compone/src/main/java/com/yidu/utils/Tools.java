@@ -1,5 +1,6 @@
 package com.yidu.utils;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import javax.crypto.*;
@@ -20,13 +21,18 @@ public class Tools {
     private static Logger logger = Logger.getLogger(ModuleTools.class);
     public static void outParamInfo(String srvname,String method,PageDataInter pageData){
         Iterator entries = pageData.entrySet().iterator();
-        logger.info("cout then param info:{srvname:"+srvname+"},{method:"+method+"}");
+        if(!StringUtils.isEmpty(srvname) && !StringUtils.isEmpty(method)){
+            logger.info("cout then param info:{srvname:"+srvname+"},{method:"+method+"}");
+        }
         while (entries.hasNext()) {
             Map.Entry entry = (Map.Entry) entries.next();
             String name = (String) entry.getKey();
             Object valueObj = entry.getValue();
             logger.info(name+":"+valueObj.toString());
         }
+    }
+    public static void outParamInfo(PageDataInter pageData){
+        outParamInfo(null,null,pageData);
     }
     public static String createRandomId(){
         UUID uuid=UUID.randomUUID();

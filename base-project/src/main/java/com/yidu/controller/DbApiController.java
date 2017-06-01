@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletResponse;
  * Created by Administrator on 2016/10/18.
  */
 @Controller
-public class DbApiController {
+public class DbApiController{
     @Autowired
     IDynCompreApiService iDynCompreApiService;
     @ResponseBody
     @RequestMapping(value = { "/api/{srvname}/{method}" }, method = {RequestMethod.GET,RequestMethod.POST},produces = "application/json; charset=utf-8")
-    public DbApiResult<Object> api(@PathVariable("srvname")String srvname,@PathVariable("method")String method,HttpServletRequest request,HttpServletResponse response){
+    public DbApiResult<Object> api(@PathVariable("srvname")String srvname, @PathVariable("method")String method, HttpServletRequest request, HttpServletResponse response){
         PageDataInter pageData=new PageData(request,PageDataEnum.DEFAULT_ENUM_PARAM);
         Tools.outParamInfo(srvname,method,pageData);
         DbApiResult<Object> dbApiResult=iDynCompreApiService.execute(srvname,method,pageData);
@@ -30,4 +30,5 @@ public class DbApiController {
         DbApiResult<Object> dbApiResult=iDynCompreApiService.execute(srvname,method,new PageData(request,PageDataEnum.DEFAULT_ENUM_PARAM),new PageDataHeaderImpl(request),file);
         return dbApiResult;
     }
+
 }

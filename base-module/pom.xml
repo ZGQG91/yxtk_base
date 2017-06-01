@@ -15,4 +15,11 @@
       <url>http://192.168.4.180:8081/nexus/content/repositories/tingfv/</url>
     </repository>
   </distributionManagement>
+  <dependencies>
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
+    </dependency>
+  </dependencies>
 </project>

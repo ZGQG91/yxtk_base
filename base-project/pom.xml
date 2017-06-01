@@ -111,6 +111,11 @@
   <dependencies>
     <dependency>
       <groupId>com.yidu.api</groupId>
+      <artifactId>base-service-valid</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.yidu.api</groupId>
       <artifactId>base-service-impl</artifactId>
       <version>1.0</version>
     </dependency>

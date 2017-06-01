@@ -4,7 +4,6 @@ import com.yidu.baseabstract.AbstractDynCompreApiService;
 import com.yidu.callback.ServiceCallback;
 import com.yidu.enums.VersionEnum;
 import com.yidu.exception.Code;
-import com.yidu.permission.Permission;
 import com.yidu.result.DbApiResult;
 import com.yidu.service.IDynCompreApiService;
 import com.yidu.service.IServiceInterface;
@@ -13,44 +12,31 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2016/10/19.
  */
 @Service
 public class DynCompreApiService extends AbstractDynCompreApiService implements IDynCompreApiService {
-    private Map<String, IServiceInterface> compareHandlers;
-    private Map<String,Permission> permission;
-    private Map<String,String> versionHanlers;
-    public void setPermission(Map<String, Permission> permission) {
-        this.permission = permission;
-    }
-
-    public void setCompareHandlers(Map<String, IServiceInterface> compareHandlers) {
-        this.compareHandlers = compareHandlers;
-    }
-    public void setVersionHanlers(Map<String, String> versionHanlers) {
-        this.versionHanlers = versionHanlers;
-    }
-
     public DbApiResult<Object> execute(String srvName, String method, PageDataInter request) {
         return this.execute(srvName, method, request,null);
     }
-
     public DbApiResult<Object> execute(final String srvName, final String method, final PageDataInter request, final PageDataInter header) {
         final DbApiResult<Object> execResult=new DbApiResult<Object>();
-        operationTemplate.opera(execResult,new ServiceCallback(){
+        operationTemplate.opera(execResult,config,new ServiceCallback(){
             IServiceInterface iServiceInterface;
             VersionEnum version;
             boolean flag;
-
+            @Override
+            public boolean valid() {
+                boolean flag=(Boolean) userColCompone.validLogin(request);
+                return flag;
+            }
             @Override
             public String versionControl() {
                 String methodVersion=findMethodVersion(srvName,method);
                 return methodVersion;
             }
-
             @Override
             public void doOperation() {
 //                String userId= (String) request.get("userId");
@@ -73,12 +59,10 @@ public class DynCompreApiService extends AbstractDynCompreApiService implements 
                     iServiceInterface=findApiHandler(srvName,VersionEnum.CURRENT_VERSION);
                 }
             }
-
             @Override
             public void check() {
                 this.check("");
             }
-
             @Override
             public void check(String methodVersion){
                 if(flag){
@@ -123,11 +107,33 @@ public class DynCompreApiService extends AbstractDynCompreApiService implements 
         request.put("file",file);
         return this.execute(srvName, method, request, header);
     }
+
+    /**
+     * 方法的版本信息
+     * @param srvname
+     * @param method
+     * @return
+     */
     public String findMethodVersion(String srvname,String method){
         if(method==null)return null;
         String version=this.method(srvname, method);
         return version;
     }
+
+    /**
+     * 是否开启用户权限配置
+     * @return
+     */
+    public boolean findMethodVersion(){
+        boolean flag=(Boolean)config.get("isValid");
+        return flag;
+    }
+    /**
+     * 查找服务
+     * @param srvname
+     * @param version
+     * @return
+     */
     public IServiceInterface findApiHandler(String srvname,VersionEnum version){
         if(version==null)return null;
         IServiceInterface iServiceInterface=this.handler(srvname, version);
@@ -136,6 +142,7 @@ public class DynCompreApiService extends AbstractDynCompreApiService implements 
         }
         return findApiHandler(srvname, version.getParent());
     }
+
     public String method(String srvname,String method){
         if(CollectionUtils.isEmpty(versionHanlers)){
             return null;

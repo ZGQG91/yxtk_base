@@ -6,7 +6,6 @@
 	<bean name="iDynCompreApiService" class="com.yidu.distribute.DynCompreApiService">
 		<property name="compareHandlers">
 			<map>
-				<entry key="userCol-1.0.0.0" value-ref="userColApyBizHandler"/>
 				<entry key="hanlpBase-1.0.0.0" value-ref="hanlpBaseApyBizHandler"/>
 			</map>
 		</property>
@@ -15,16 +14,20 @@
 				<entry key="hanlpBase-testHanlpVersion" value="3.6"/>
 			</map>
 		</property>
+		<!--自定义权限-->
+		<!-- ROLE_ADMIN 可以根据通配符或者方法方式过滤-->
 		<property name="permission">
 			<map>
 				<entry key="token" value="ROLE_ADMIN|OR"/>
 				<entry key="business" value="ROLE_USER|OR"/>
 			</map>
 		</property>
-		<!--自定义权限-->
-		<!-- ROLE_ADMIN 可以根据通配符或者方法方式过滤-->
+		<property name="config">
+			<map>
+				<entry key="isValid" value="false"/>
+			</map>
+		</property>
 	</bean>
-	<bean name="userColApyBizHandler" class="com.yidu.service.impl.UserColService"></bean>
 	<bean name="hanlpBaseApyBizHandler" class="com.yidu.service.impl.HanlpBaseService"></bean>
 </beans>
 

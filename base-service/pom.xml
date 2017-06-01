@@ -37,11 +37,6 @@
       <version>${spring.version}</version>
     </dependency>
     <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-      <version>2.6</version>
-    </dependency>
-    <dependency>
       <groupId>com.yidu.api</groupId>
       <artifactId>base-service-api</artifactId>
       <version>1.1</version>

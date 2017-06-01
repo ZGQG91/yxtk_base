@@ -3,14 +3,12 @@ package com.yidu.service.impl;
 import com.hankcs.hanlp.dictionary.CustomDictionary;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.StandardTokenizer;
-import com.readyidu.nlp.NLPInitializtion;
 import com.yidu.HanlpBaseServiceInter;
 import com.yidu.baseabstract.AbstractService;
 import com.yidu.callback.MethodCallback;
 import com.yidu.exception.Code;
 import com.yidu.result.DbApiResult;
 import com.yidu.service.IServiceInterface;
-import com.yidu.template.OperationMethodTemplate;
 import com.yidu.utils.PageDataInter;
 
 import java.util.List;

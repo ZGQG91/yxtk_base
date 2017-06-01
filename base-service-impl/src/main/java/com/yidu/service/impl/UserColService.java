@@ -44,7 +44,7 @@ public class UserColService extends AbstractService implements IServiceInterface
     }
 
     public Object validLogin(Map<String,Object> map){
-        boolean flag=userColCompone.validLogin(map);
+        Object flag=userColCompone.validLogin(map);
         return flag;
     }
 

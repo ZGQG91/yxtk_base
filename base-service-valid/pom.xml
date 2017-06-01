@@ -10,7 +10,7 @@
   <dependencies>
     <dependency>
       <groupId>com.yidu.api</groupId>
-      <artifactId>base-module</artifactId>
+      <artifactId>base-compone</artifactId>
       <version>1.0</version>
     </dependency>
   </dependencies>

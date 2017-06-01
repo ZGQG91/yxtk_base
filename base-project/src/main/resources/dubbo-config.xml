@@ -9,5 +9,6 @@
 	<dubbo:registry address="${dubbo.registry.address}"/>
 	<!-- 用dubbo协议在20880端口暴露服务 -->
 	<dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" />
+	<dubbo:reference id="userRestService" interface="com.readyidu.service.UserRestService" version="1.0.0" timeout="3000" lazy="true" check="false"/>
 </beans>
 

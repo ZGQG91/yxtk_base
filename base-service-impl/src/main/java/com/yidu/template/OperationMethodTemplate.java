@@ -16,7 +16,7 @@ public class OperationMethodTemplate {
      * @param methodVersion 配置的版本
      * @param methodCallback  回调
      */
-    public void opera(DbApiResult<Object> execResult,String version, String methodVersion, MethodCallback methodCallback){
+    public void opera(DbApiResult<Object> execResult, String version, String methodVersion, MethodCallback methodCallback){
         if(StringUtils.isEmpty(methodVersion)){
             methodCallback.invokeMethod();
         }

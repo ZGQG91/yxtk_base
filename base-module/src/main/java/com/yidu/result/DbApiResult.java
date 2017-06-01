@@ -16,24 +16,24 @@ public class DbApiResult<T>{
     public DbApiResult(){
 
     }
-    public DbApiResult(T data,String message,boolean success,String version){
+    public DbApiResult(T data, String message, boolean success, String version){
         this.data=data;
         this.message=message;
         this.success=success;
         this.version=version;
     }
-    public DbApiResult(T data,String message,boolean success){
+    public DbApiResult(T data, String message, boolean success){
         this.data=data;
         this.message=message;
         this.success=success;
     }
-    public DbApiResult(T data,String message,boolean success,T totalCount){
+    public DbApiResult(T data, String message, boolean success, T totalCount){
         this.data=data;
         this.message=message;
         this.success=success;
         this.totalCount=totalCount;
     }
-    public DbApiResult(T data,String message,boolean success,T totalCount,int code){
+    public DbApiResult(T data, String message, boolean success, T totalCount, int code){
         this.data=data;
         this.message=message;
         this.success=success;
