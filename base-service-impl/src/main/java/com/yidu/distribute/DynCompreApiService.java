@@ -119,15 +119,6 @@ public class DynCompreApiService extends AbstractDynCompreApiService implements 
         String version=this.method(srvname, method);
         return version;
     }
-
-    /**
-     * 是否开启用户权限配置
-     * @return
-     */
-    public boolean findMethodVersion(){
-        boolean flag=(Boolean)config.get("isValid");
-        return flag;
-    }
     /**
      * 查找服务
      * @param srvname

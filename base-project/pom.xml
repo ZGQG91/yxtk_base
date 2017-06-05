@@ -62,7 +62,7 @@
             <archive>
               <addMavenDescriptor>false</addMavenDescriptor>
             </archive>
-            <warName>hanlp-service</warName>
+            <warName>base-service</warName>
             <webResources>
               <resource>
                 <directory>src/main/resources/${package.environment}</directory>
